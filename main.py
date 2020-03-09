@@ -1,24 +1,20 @@
 import re
 import requests
 
-#coletando sites que deseja analisar
+#input of website for colet subdomains
 print("Entre com a url completa do site que deseja checar subdomínios: ")
 leiaStr = input()
 
 
 
 url = requests.get(leiaStr)
-result = url.text
+result_html = url.text
 ###this is return all html text
 
 
+regex_sites = re.findall(r'https://(.*?)/', result_html)
+#regex in all that is inside "https and /"
 
-#dir (requests)
-text_regex = result
 
-m = re.findall(r'https://(.*?)/', text_regex)
-#m = re.findall(r"https://.*.+\/", text_regex).
-#oi = m.search("https://.*?",m)
-
-unique_elements_list=list(set(m))
+unique_elements_list=list(set(regex_sites))
 print(unique_elements_list)
